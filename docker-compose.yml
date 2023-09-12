@@ -1,0 +1,15 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo:5.0.3
+    ports:
+      - "27017:27017"
+  app:
+    build: .
+    ##image: tripster_user_ms:v1.0  # Reemplaza con el nombre y etiqueta de tu imagen de la aplicación
+    ports:
+      - "8080:8080"  # Mapeo de puerto para la aplicación (puerto del contenedor : puerto del host)
+    environment:
+      - spring.data.mongodb.host=tripster_user_ms-mongodb-1
+    depends_on:
+      - mongodb
